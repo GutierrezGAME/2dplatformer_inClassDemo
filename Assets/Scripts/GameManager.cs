@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,18 @@ public class GameManager : MonoBehaviour
 
     // hold current score
 
-    public int playerHealth = 5;
+    public int playerHealth = 3;
+    public TextMeshProUGUI healthText;
+
+    void Start()
+    {
+        healthText.text = "Health: " + playerHealth.ToString();
+    }
 
     public void loseHealth(int healthToLose)
     {
         playerHealth -= healthToLose;
-        Debug.Log(playerHealth);
+        healthText.text = "Health: " + playerHealth.ToString();
 
         //check for if health <= 0 
         //if so die
@@ -25,7 +32,7 @@ public class GameManager : MonoBehaviour
     public void gainHealth(int healthToGain)
     {
         playerHealth += healthToGain;
-        Debug.Log(playerHealth);
+        healthText.text = "Health: " + playerHealth.ToString();
 
         //check for if health <= 0 
         //if so die

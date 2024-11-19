@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //components
+    private Rigidbody2D rb;
+    private Animator animator;
 
     // movement stuff
-    
     public float movementSpeed = 5.0f;
     public float jumpForce = 5.0f;
     public float groundCheckRadius = 0.1f;
@@ -14,16 +16,7 @@ public class PlayerController : MonoBehaviour
     // input
     private float horizontalMove = 0f;
 
-    private Rigidbody2D rb;
-    private Animator animator;
-
-    // projectile stuff
-    public Projectile projectilePrefab;
-    public Transform projectileSpawnPoint;
-
-    // melee attack
-    public GameObject swordHitBox;
-
+    
     // jump checks
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -87,24 +80,6 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        if(Input.GetButtonDown("Fire1"))
-        {
-            //make a projectile
-            Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
-        }
-
-        if(Input.GetButton("Fire2"))
-        {
-            //make a projectile
-            // Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
-            swordHitBox.SetActive(true);
-        }
-        else{
-            swordHitBox.SetActive(false);
-        }
-
-        
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -128,6 +103,11 @@ public class PlayerController : MonoBehaviour
         }
         
 
+    }
+
+    public void knockBack(float knockLeft, float knockUp)
+    {
+        rb.velocity = new Vector2(knockLeft, knockUp);
     }
 
     private void Flip()

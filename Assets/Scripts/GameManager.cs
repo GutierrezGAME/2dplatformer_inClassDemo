@@ -43,17 +43,18 @@ public class GameManager : MonoBehaviour
 
 
 /*
-TODO:
+What I have done:
 
-UI // use the roll-a-ball tutorial
-Move Pickups to Player Centered model (1 script that handles the interactions)
-change trap to damage player script
-Melee attack
+SoundEffects https://www.youtube.com/watch?v=DU7cgVsU2rM
+Play Random Sound Effects
+player death
+
+TODO:
 Go inside of a house
 Transport script : to get out of the house
-Audio - play sound when shooting
-Fix how player takes damage
-player death
+
+
+
 Better Camera
 2D lighting
 

@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     public int health = 3;
+    public float maxSpeed = 3.0f;
     public EnemySprite sprite;
     public AIPath aiPath;
 
@@ -14,35 +15,40 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         aiPath = GetComponent<AIPath>();
+        aiPath.maxSpeed = maxSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public void takeDamage(int damage)
     {
-        if (col.gameObject.tag == "Projectile")
+        health -= damage;
+
+        if (health <= 0)
         {
-            health -= 1;
-
-            if(health <= 0)
-            {
-                sprite.Death();
-                aiPath.maxSpeed = 0;
-                StartCoroutine(destroyAfterSeconds(1));
-                // Destroy(this.gameObject);
-            }
+            sprite.Death();
+            aiPath.maxSpeed = 0;
+            Destroy(this.gameObject, 1.0f);
         }
+
+        stopChasingForTime(0.5f);
     }
 
-    IEnumerator destroyAfterSeconds(int time)
+    public void stopChasingForTime(float time)
     {
+        StartCoroutine(pauseMovement(time));
+    }
+
+    IEnumerator pauseMovement(float time)
+    {
+        aiPath.maxSpeed = 0;
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(time);
 
-        Destroy(this.gameObject);
+        aiPath.maxSpeed = maxSpeed;
     }
 }

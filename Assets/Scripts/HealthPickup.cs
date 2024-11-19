@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    public int amountToHeal = 1;
+    
 
     public GameManager manager;
 
@@ -16,19 +16,11 @@ public class HealthPickup : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (collision.gameObject.tag == "Player")
-        {
-            manager.gainHealth(amountToHeal);
-            Destroy(this.gameObject);
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            manager.gainHealth(amountToHeal);
-            Destroy(this.gameObject);
-        }
+        
     }
 }

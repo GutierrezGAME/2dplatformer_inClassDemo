@@ -19,5 +19,11 @@ public class Projectile : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        if (col.gameObject.tag == "Enemy")
+        {
+            col.GetComponent<Enemy>().takeDamage(1);
+            Destroy(this.gameObject);
+        }
     }
 }

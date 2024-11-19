@@ -5,13 +5,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
-    // hold player health
-    // handle game over
-
-
-    // hold current score
-
     public int playerHealth = 3;
     public TextMeshProUGUI healthText;
 

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    public int damageToPlayer = 1;
-    public int amountToHeal = 1;
+    private int damageToPlayer = 1;
+    private int amountToHeal = 1;
 
-    public GameManager manager;
+    private GameManager manager;
     public PlayerController playerController;
+
+    [Header("Audio Stuff")]
+    public AudioClip drinkPotionAudio;
 
     void Start()
     {
@@ -33,6 +36,7 @@ public class PlayerCollisions : MonoBehaviour
         {
             manager.gainHealth(amountToHeal);
             Destroy(collision.gameObject);
+            SoundEffectsManager.instance.PlaySoundEffect(drinkPotionAudio, this.gameObject.transform, 1f);
         }
     }
 

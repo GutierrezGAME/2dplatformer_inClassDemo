@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Projectile Stuff")]
     // projectile stuff
     public Projectile projectilePrefab;
     public Transform projectileSpawnPoint;
+
+
+    [Header("Melee Stuff")]
     public Transform meleeSpawnPoint;
     public float meleeAttackRange = 5.0f;
     public LayerMask enemyLayers;
 
     private Animator animator;
+
+
+    [Header("Audio Stuff")]
+    public AudioClip[] swingAudio;
+    public AudioClip[] projectileAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +46,7 @@ public class PlayerCombat : MonoBehaviour
     void projectileAttack()
     {
         //make a projectile
+        SoundEffectsManager.instance.PlayRandomSoundEffect(projectileAudio, projectileSpawnPoint, .75f);
         Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
     }
 
@@ -44,6 +54,9 @@ public class PlayerCombat : MonoBehaviour
     {
 
         animator.SetTrigger("attack");
+
+        //plays audio
+        SoundEffectsManager.instance.PlayRandomSoundEffect(swingAudio, meleeSpawnPoint, .75f);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(meleeSpawnPoint.position, meleeAttackRange, enemyLayers);
 
